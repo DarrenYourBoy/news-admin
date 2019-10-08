@@ -14,6 +14,18 @@ Vue.config.productionTip = false
 
 Vue.use(ElementUI);
 
+router.beforeEach((to, from, next) => {
+  if (to.path !== '/login') {
+    //由于token为空时解析会报错 添加||'{}'  {}必须为字符串
+    const token = JSON.parse(localStorage.getItem('user') || '{}').token
+    if (token) {
+      next()
+    } else {
+      next('/login')
+    }
+  }
+  next()
+})
 
 new Vue({
   router,

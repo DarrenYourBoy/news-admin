@@ -8,6 +8,7 @@
         class="demo-ruleForm form-container"
         :rules="rules"
         ref="formdata"
+        :model="formdata"
       >
         <el-form-item label="账户" prop="username">
           <el-input v-model="formdata.username"></el-input>
@@ -34,18 +35,18 @@ export default {
       rules: {
         username: [
           { required: true, message: "请输入账号", trigger: "blur" },
-          { min: 3, max: 5, message: "长度在3到5个字符间", trigger: "blur" }
+          { min: 3, max: 6, message: "长度在3到6个字符间", trigger: "blur" }
         ],
         password: [
           { required: true, message: "请输入密码", trigger: "blur" },
-          { min: 3, max: 5, message: "长度在3到5个字符间", trigger: "blur" }
+          { min: 3, max: 6, message: "长度在3到6个字符间", trigger: "blur" }
         ]
       }
     };
   },
   methods: {
     submitForm() {
-      this.$refs[formdata].validate(valid => {
+      this.$refs.formdata.validate(valid => {
         if (valid) {
           this.$axios({
             url: "/login",
@@ -58,7 +59,9 @@ export default {
             } else {
               this.$message.success(message);
               localStorage.setItem("user", JSON.stringify(data));
-              this.$router.push("/");
+              setTimeout(()=>{
+                this.$router.push("/");
+              },1000)
             }
           });
         }else{
