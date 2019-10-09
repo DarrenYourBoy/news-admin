@@ -29,7 +29,7 @@ export default new Router({
         {
           path: 'postPublish',
           component: PostPublish,
-          meta:'文章发布'
+          meta:'发布文章'
         }
       ]
     }

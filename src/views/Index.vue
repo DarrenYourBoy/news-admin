@@ -17,9 +17,15 @@
       </el-aside>
       <el-container>
         <el-header class="header">
-          <img :src="$axios.defaults.baseURL+ user.head_img" alt class="headImg" />
+          <img
+            :src="$axios.defaults.baseURL+ user.head_img"
+            alt
+            class="headImg"
+            style="cursor:pointer"
+          />
           <span class="nickname">{{user.nickname}}</span>
-          <span class="logOut">退出</span>
+          <!-- <span  style="cursor:pointer">退出</span> -->
+          <el-button type="danger" class="logOut">退出</el-button>
         </el-header>
         <el-main>
           <router-view></router-view>
@@ -39,14 +45,13 @@ export default {
   props: ["src"],
   methods: {
     postList() {
-      this.$router.push('postList')
+      this.$router.push("postList");
     },
     postPublish() {
-      this.$router.push('postPublish')
+      this.$router.push("postPublish");
     }
   },
-  mounted() {
-  }
+  mounted() {}
 };
 </script>
 
